@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        body {
+            background-color: rgb(166, 166, 231);
+            font-family: Arial, sans-serif;
+        }
+
+        .lista-container {
+            margin-top: 200px;
+            text-align: center;
+            font-size: 30px;
+            padding: 30px;
+            margin: 0 auto;
+        }
+
+        .item {
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 30px;
+            padding: 30px;
+        }
+
+        .item input[type="text"] {
+            text-align: center;
+            
+            
+        }
+
+        .item input[type="checkbox"] {
+            margin-right: 5px;
+            font-size: 50px;
+            padding: 30px;
+        }
+
+        .comprado {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .inputitem{
+            font-size: 30px;
+        }
+        button{
+            background-color: rgb(47, 183, 47);
+        }
+
+        .saida{
+            margin-left: 850px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body><br><br>
+    <div class="lista-container">
+        <h1>Lista de Compras</h1>
+        
+        <div>
+            <input class="inputitem" type="text" id="novo-item" placeholder="Digite o item...">
+            <button class="inputitem" id="adicionar-item">Adicionar</button>
+            <div class="saida" id="lista-compras">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const listaCompras = document.getElementById('lista-compras');
+            const novoItemInput = document.getElementById('novo-item');
+            const adicionarItemBtn = document.getElementById('adicionar-item');
+
+            function adicionarItem() {
+                const itemNome = novoItemInput.value.trim();
+                if (itemNome !== '') {
+                    const item = document.createElement('div');
+                    item.classList.add('item');
+
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.addEventListener('change', function () {
+                        itemNomeElemento.classList.toggle('comprado', this.checked);
+                    });
+
+                    const itemNomeElemento = document.createElement('span');
+                    itemNomeElemento.textContent = itemNome;
+
+                    item.appendChild(checkbox);
+                    item.appendChild(itemNomeElemento);
+                    listaCompras.appendChild(item);
+
+                    novoItemInput.value = '';
+                }
+            }
+
+
+            adicionarItemBtn.addEventListener('click', adicionarItem);
+
+
+            novoItemInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    adicionarItem();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
